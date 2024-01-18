@@ -20,13 +20,15 @@ public class PlayerAttack : MonoBehaviour
         // Keep track of the time since ability was last used
         // then compare it to the cooldown duration
         if (Input.GetKeyDown(KeyCode.X) && Time.time > lastUsedTime + cooldownTime) {
-            player.canMove = false;
+            
             StartCoroutine(fireProjectile());
             lastUsedTime = Time.time;
         }
+        
     }
 
     IEnumerator fireProjectile() {
+        player.canMove = false;
         for (int i = 0; i < 3; i++) {
                 Instantiate(projectile, firePosition.position, firePosition.rotation);
                 yield return new WaitForSeconds(.1f);

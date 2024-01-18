@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 2.0f;
     private float dirX;
 
-    [SerializeField] private float jumpForce = 5.0f;
+    [SerializeField] private float jumpForce = 10.0f;
     private bool isGrounded;
     private bool isFacingRight = true;
     public bool canMove = true;
