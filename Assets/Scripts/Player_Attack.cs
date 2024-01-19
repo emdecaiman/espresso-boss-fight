@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,27 +13,27 @@ public class PlayerAttack : MonoBehaviour
     private float lastUsedTime;
 
 
-    void Start() {
+    private void Awake() {
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
-    void Update() {
+    private void Update() {
         // Keep track of the time since ability was last used
         // then compare it to the cooldown duration
         if (Input.GetKeyDown(KeyCode.X) && Time.time > lastUsedTime + cooldownTime) {
-            
-            StartCoroutine(fireProjectile());
+            StartCoroutine(FireProjectile());
             lastUsedTime = Time.time;
         }
         
     }
 
-    IEnumerator fireProjectile() {
-        player.canMove = false;
+    private IEnumerator FireProjectile() {
+        Debug.Log("Input: Attack");
+        player.isAttacking = true;
         for (int i = 0; i < 3; i++) {
                 Instantiate(projectile, firePosition.position, firePosition.rotation);
                 yield return new WaitForSeconds(.1f);
             }
-        player.canMove = true;
+        player.isAttacking = false;
     }
 }
